@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { supabase, BUCKET_FOTOS } from '../lib/supabase'
 import { comprimirImagen } from '../lib/imagen'
+import { uuid } from '../lib/id'
 import type { NuevoHelado } from '../types'
 import RatingHeladitos from './RatingHeladitos'
 
@@ -43,7 +44,7 @@ export default function PantallaCargar({ persona, onGuardado, onListo }: Props) 
   /** Sube la foto al bucket y devuelve la URL pública. */
   async function subirFoto(file: File): Promise<string> {
     const comprimida = await comprimirImagen(file)
-    const nombre = `${crypto.randomUUID()}.jpg`
+    const nombre = `${uuid()}.jpg`
 
     const { error } = await supabase.storage
       .from(BUCKET_FOTOS)
