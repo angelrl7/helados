@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-crema text-chocolate font-sans antialiased;
+    /* Fondo cremoso con dos manchones tipo bocha de helado. */
+    background-image:
+      radial-gradient(70% 45% at 82% -4%, rgba(255, 143, 169, 0.20) 0%, transparent 60%),
+      radial-gradient(60% 40% at 8% 8%, rgba(169, 217, 190, 0.24) 0%, transparent 60%);
+    background-attachment: fixed;
+    min-height: 100dvh;
+  }
+
+  /* Nada de zoom automático de iOS al enfocar un input. */
+  input,
+  textarea,
+  select,
+  button {
+    font-size: 16px;
+    font-family: inherit;
+  }
+}
+
+@layer components {
+  .campo {
+    @apply w-full rounded-2xl border-2 border-vainilla bg-white/90 px-4 py-3.5
+           text-base text-chocolate placeholder:text-cacao/50
+           outline-none transition focus:border-frutilla focus:ring-4 focus:ring-frutilla/20;
+  }
+
+  .etiqueta {
+    @apply mb-2 block font-display text-[15px] font-600 text-chocolate;
+  }
+
+  .tarjeta {
+    @apply overflow-hidden rounded-2.5xl border-2 border-white bg-white/85 shadow-card backdrop-blur-sm;
+  }
+
+  /* Área de toque cómoda para el pulgar en todos los botones. */
+  .toque {
+    @apply min-h-[52px] active:scale-[0.97] transition-transform;
+  }
+}
+
+/* Ocultamos scrollbars horizontales de los carruseles de chips. */
+.sin-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.sin-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.28) rotate(-6deg); }
+  100% { transform: scale(1); }
+}
+.animar-pop {
+  animation: pop 0.32s ease-out;
+}
+
+@keyframes subir {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animar-subir {
+  animation: subir 0.3s ease-out both;
+}
